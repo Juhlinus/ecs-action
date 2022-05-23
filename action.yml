@@ -1,0 +1,18 @@
+inputs:
+  version:
+    description: 'Which version of Easy Coding Standard'
+    required: false
+    default: 'main'
+
+  branch:
+    description: 'Which branch to diff against'
+    required: false
+    default: 'develop'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.version }}
+    - ${{ inputs.branch }}
+    - ${{ inputs.args }}
