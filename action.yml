@@ -9,6 +9,11 @@ inputs:
     description: 'Which files to run on'
     required: true
 
+  composer_ignore_platform_reqs:
+    required: false
+    default: false
+    description: 'Whether or not the --ignore-platform-reqs flag is passed to Composer'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
