@@ -20,4 +20,6 @@ else
     echo "composer.json not found in repo, skipping Composer installation"
 fi
 
-/composer/vendor/bin/ecs check $1 --fix
+JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json)
+JSON_OUTPUT="${JSON_OUTPUT//$'\n'/\\n}}"
+echo "::set-output name=ecs_output::$JSON_OUTPUT"
