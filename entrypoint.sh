@@ -22,9 +22,9 @@ fi
 
 RUN=1
 echo "Run #$RUN"
-JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json)
+JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json) | $(jq '. | {totals: .totals.diffs}.totals')
 
-while [["$JSON_OUTPUT" | $(jq '. | {totals: .totals.diffs}.totals') != "0" ]]; do
+while [["$JSON_OUTPUT" != "0" ]]; do
     echo "Run #$RUN"
-    JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json)
+    JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json) | $(jq '. | {totals: .totals.diffs}.totals')
 done
