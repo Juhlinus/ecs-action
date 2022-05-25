@@ -21,5 +21,7 @@ else
 fi
 
 JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json)
+echo "First: $JSON_OUTPUT"
 JSON_OUTPUT="${JSON_OUTPUT//$'\n'/\\n}}"
+echo "Second: $JSON_OUTPUT"
 echo "::set-output name=ecs_output::$JSON_OUTPUT"
