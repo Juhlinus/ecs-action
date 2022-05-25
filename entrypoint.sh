@@ -20,11 +20,4 @@ else
     echo "composer.json not found in repo, skipping Composer installation"
 fi
 
-RUN=1
-echo "Run #$RUN"
-JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json) | $(jq '. | {totals: .totals.diffs}.totals')
-
-while [[ $JSON_OUTPUT -ne "0" ]]; do
-    echo "Run #$RUN"
-    JSON_OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix --output-format=json) | $(jq '. | {totals: .totals.diffs}.totals')
-done
+/composer/vendor/bin/ecs check $1 --fix
