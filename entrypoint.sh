@@ -25,7 +25,9 @@ ECS_FIX_COMMAND="$ECS_COMMAND --fix"
 
 OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix)
 OUTPUT="$OUTPUT $(/composer/vendor/bin/ecs check $1 --fix)" # Second run just in case
-OUTPUT="${OUTPUT//$'\n'/\\n}}"
+OUTPUT="${OUTPUT//'%'/'%25'}"
+OUTPUT="${OUTPUT//$'\n'/'%0A'}"
+OUTPUT="${OUTPUT//$'\r'/'%0D'}"
 
 echo "OUTPUT: $OUTPUT"
 echo "::set-output name=ecs_output::$OUTPUT"
