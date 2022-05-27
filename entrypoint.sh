@@ -20,11 +20,11 @@ else
     echo "composer.json not found in repo, skipping Composer installation"
 fi
 
-ECS_COMMAND="/composer/vendor/bin/ecs check $1"
-ECS_FIX_COMMAND="$ECS_COMMAND --fix"
+echo "Got these files $1"
 
 OUTPUT=$(/composer/vendor/bin/ecs check $1 --fix)
 OUTPUT="$OUTPUT $(/composer/vendor/bin/ecs check $1 --fix)" # Second run just in case
+OUTPUT="$OUTPUT $(/composer/vendor/bin/ecs check $1 --fix)" # Third run just in case
 OUTPUT="${OUTPUT//'%'/'%25'}"
 OUTPUT="${OUTPUT//$'\n'/'%0A'}"
 OUTPUT="${OUTPUT//$'\r'/'%0D'}"
